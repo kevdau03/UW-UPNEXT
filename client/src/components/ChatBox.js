@@ -13,25 +13,25 @@ const ChatWindow = () => {
       const response = await axios.post(`${backend_url}/api/user_prompt`, { message: userInput });
 
       // Update chat window with user message
-      setMessages([...messages, { user: true, text: userInput }]);
+      setMessages((prevMessages) => [...prevMessages, { user: true, text: userInput }]);
       setUserInput('');
-
+    
       // Handle Gemini response (implementation depends on your server-side logic)
-      const geminiResponse = response.message; // Replace with actual response data structure
-      if(geminiResponse !== undefined){ 
-        setMessages([...messages, { user: false, text: geminiResponse }]);
-      }else{
-        setMessages([...messages, { user: false, text: "Error getting events" }]);
+      const geminiResponse = response.data.message; // Replace with actual response data structure
+      if (geminiResponse !== undefined) {
+        setMessages((prevMessages) => [...prevMessages, { user: false, text: geminiResponse }]);
+      } else {
+        setMessages((prevMessages) => [...prevMessages, { user: false, text: "Error getting events" }]);
       }
     } catch (error) {
       console.error('Error sending message:', error);
     }
   };
-
+  console.log(messages)
   return (
     <div className="chat-window">
-      {messages.map((message) => (
-        <div key={message.text} className={`message ${message.user ? 'user' : 'gemini'}`}>
+      {messages.map((message, index) => (
+        <div key={index} className={`message ${message.user ? 'user' : 'gemini'}`}>
           {message.text}
         </div>
       ))}
