@@ -41,7 +41,7 @@
   position: absolute;
   top: 20px;
   left: 20px;
-  width: 70px;  /* Adjust the width as needed */
+  width: 150px;  /* Adjust the width as needed */
   height: auto; /* Maintain aspect ratio */
 }
 

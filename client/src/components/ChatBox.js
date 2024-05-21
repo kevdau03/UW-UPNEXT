@@ -7,14 +7,14 @@ const ChatWindow = () => {
   const backend_url = "http://localhost:5000"
   const sendMessage = async () => {
     if (!userInput) return;
-
+    setMessages((prevMessages) => [...prevMessages, { user: true, text: userInput }]);   
+    setUserInput('');
     try {
       // Send user message to server-side API endpoint (replace with your endpoint URL)
       const response = await axios.post(`${backend_url}/api/user_prompt`, { message: userInput });
 
       // Update chat window with user message
-      setMessages((prevMessages) => [...prevMessages, { user: true, text: userInput }]);
-      setUserInput('');
+      
     
       // Handle Gemini response (implementation depends on your server-side logic)
       const geminiResponse = response.data.message; // Replace with actual response data structure
