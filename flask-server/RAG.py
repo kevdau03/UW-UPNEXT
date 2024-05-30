@@ -2,11 +2,15 @@ import together
 from pymongo import MongoClient
 from typing import List
 import time
-
+from dotenv import load_dotenv
+import os
 from pymongo import MongoClient
 
-#mongoDB connection=
-uri = "mongodb+srv://jimmyphan101004:b5ZRMEY0G3GdYHL3@cluster0.zduycsi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+load_dotenv(dotenv_path='./secrets.env')
+
+#mongoDB connection
+
+uri = os.getenv('MONGO_CONN_URI')
 
 # Create a new client and connect to the server
 mongoclient = MongoClient(uri)
@@ -16,7 +20,7 @@ collection = db['Posts']
 
 
 #init together ai
-together.api_key = "00801d9e52f3257f9f6957d51f9231b6b27a1b873e0cc7598fafd21210712f6c"
+together.api_key = os.getenv('TOGETHER_API_KEY')
 #code for embedding
 embedding_model_string = 'WhereIsAI/UAE-Large-V1' # model API string from Together.
 vector_database_field_name = 'embedded' # define your embedding field name.

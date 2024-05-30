@@ -1,6 +1,10 @@
 import google.generativeai as genai
 from RAG import return_events
-API_KEY = "AIzaSyAnWA58Y4NpDY-rss-LQphg2oyPUxqAgd8"
+from dotenv import load_dotenv
+import os
+
+load_dotenv(dotenv_path='./secrets.env')
+API_KEY = os.getenv('GEMINI_API_KEY')
 genai.configure(api_key=API_KEY)
    # Initialize the generative model
 model = genai.GenerativeModel('gemini-pro')
